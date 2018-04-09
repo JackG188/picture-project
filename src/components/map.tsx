@@ -7,7 +7,7 @@ export interface MapProps {
   center: LocationObject;
   zoom: number;
 }
-
+//
 export interface LocationObject {
   lat: number;
   lng: number;
@@ -16,18 +16,25 @@ export interface LocationObject {
 class Map extends React.Component<MapProps> {
   render() {
     return (
-        <div className="mapContainer" style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{key: ''}/* YOUR KEY HERE */}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <Pin
-            lat={54.9692157}
-            lng={-1.6714645}
-            text={'Home'}
-          />
-        </GoogleMapReact>
+      <div className="mapContainer">
+        <div style={{ height: '100vh', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{key: ''}/* YOUR KEY HERE */}
+            defaultCenter={this.props.center}
+            defaultZoom={this.props.zoom}
+          >
+            <Pin
+              lat={54.9692157}
+              lng={-1.6714645}
+              text={'Newcastle'}
+            />
+            <Pin
+              lat={41.3948976}
+              lng={2.0787282}
+              text={'Barcelona'}
+            />
+          </GoogleMapReact>
+        </div>
       </div>
     );
   }
