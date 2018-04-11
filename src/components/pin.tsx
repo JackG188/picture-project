@@ -36,7 +36,6 @@ class ConnectedPin extends React.Component<PinProps & DispatchFromProps, {}> {
   }
 
   showPhotos = () => {
-    window.alert('hi');
     this.props.selectLocation(this.props.text);
     this.props.toggleModal();
   }

@@ -10,7 +10,7 @@ class App extends React.Component {
       lat: 54.9692157,
       lng: -1.6714645
     },
-    zoom: 15
+    zoom: 4
   };
 
   render() {

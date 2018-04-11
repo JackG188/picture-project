@@ -1,43 +1,57 @@
 import * as React from 'react';
 import './map.scss';
-import Pin from './pin';
-import GoogleMapReact from 'google-map-react';
+import { connect } from 'react-redux';
+import Pin, { PinProps } from './pin';
+import GoogleMapReact, { Options } from 'google-map-react';
+import { RootState } from '../reducers';
+import mapStyles from './mapStyles';
 
 export interface MapProps {
   center: LocationObject;
   zoom: number;
+  pins?: PinProps[];
 }
-//
+
 export interface LocationObject {
   lat: number;
   lng: number;
 }
 
-class Map extends React.Component<MapProps> {
+const mapStateToProps = (state: RootState) => {
+  return {
+    pins: state.pins
+  };
+};
+
+const mapOptions: Options = {
+  styles: mapStyles
+};
+
+class ConnectedMap extends React.Component<MapProps> {
   render() {
     return (
       <div className="mapContainer">
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
+            options={mapOptions}
             bootstrapURLKeys={{key: ''}/* YOUR KEY HERE */}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            <Pin
-              lat={54.9692157}
-              lng={-1.6714645}
-              text={'Newcastle'}
-            />
-            <Pin
-              lat={41.3948976}
-              lng={2.0787282}
-              text={'Barcelona'}
-            />
+            {this.props.pins !== undefined && this.props.pins.map(pin => (
+              <Pin
+                lat={pin.lat}
+                lng={pin.lng}
+                text={pin.text}
+              />
+            ))}
           </GoogleMapReact>
         </div>
       </div>
     );
   }
 }
+
+const Map = connect<any, any, any, any>(mapStateToProps, {})(ConnectedMap);
 
 export default Map; 

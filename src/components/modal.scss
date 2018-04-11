@@ -1,13 +1,29 @@
-.modal {
-    width: 90%;
-    height: 90%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: inline-block;
-    background: grey;
+.modalBody {
+    height: 100%;
+    display: flex;
+
+    .markdownContainer {
+        display: inline-block;
+        width: 100%;
+        h1 {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .largeImage {
+            width: 80%;
+            height: 80%;
+        }
+
+        p {
+            text-align: center;
+            img {
+                width: 50%;
+                height: 50%;
+            }
+        }
+    }
 }
 
 .hide {
