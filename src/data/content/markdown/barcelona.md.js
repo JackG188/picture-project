@@ -5,21 +5,19 @@ export default `# Barcelona: Round 3
 
 ### Intro
 
+<section>
+<p>This is a test</p>
+<img class="big" src="${IMG_2730}"></img>
+</section>
 
 This is a test
 
-![img1](${IMG_2730})
+<img className="test" src="${IMG_2730}"></img>
 
 This is a test
-
-![img1](${IMG_2730})
-
+<img className="test" src="${IMG_2730}"></img>
 This is a test
 
-![img1](${IMG_2730})
-
-This is a test
-
-![img1](${IMG_2730})
+<img className="test" src="${IMG_2730}"></img>
 
 `

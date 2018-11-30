@@ -8,3 +8,8 @@ export const selectLocation = (location: string) => ({
 export const viewModal = () => ({
     type: VIEW_MODAL
 });
+
+export const setMarkdown = (markdown: string) => ({
+    type: 'SET_MARKDOWN',
+    payload: markdown
+});

@@ -1,23 +1,24 @@
 import { SELECT_LOCATION, VIEW_MODAL } from '../actions/actionTypes';
-import { PinProps } from '../components/pin';
+import { PinProps } from '../components/pin/pin';
 import pins from '../data/pins';
 
 export interface RootState {
     selectedLocation: string;
     viewModal: boolean;
     pins: PinProps[];
+    markdown: string;
 }
 
 const initState: RootState = {
     selectedLocation: '',
     viewModal: false,
-    pins: pins.pins
+    pins: pins.pins,
+    markdown: ''
 };
 
 const rootReducer = (state = initState, action: any) => {
     switch (action.type) {
         case SELECT_LOCATION:
-            console.log(state);
             return {
                 ...state,
                 selectedLocation: action.payload
@@ -26,6 +27,11 @@ const rootReducer = (state = initState, action: any) => {
             return {
                 ...state,
                 viewModal: !state.viewModal
+            };
+        case 'SET_MARKDOWN':
+            return {
+                ...state,
+                markdown: action.payload
             };
         default:
             return state;

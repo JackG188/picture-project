@@ -1,0 +1,53 @@
+.tile {
+    --fade-animation: fade 200ms ease-in forwards;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .tile-info { 
+        opacity: 0.1;
+        display: none;
+        text-transform: capitalize;
+        position: absolute;
+        bottom: 15%;
+        right: 0;
+        margin-right: 10%;
+        font-size: 20px;
+        .location {
+            text-transform: uppercase;
+            color: white;
+        }
+        .date {
+            text-align: end;
+        }
+    }
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+.tile:hover {
+    .tile-info {
+        animation-name: fade;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        animation: var(--fade-animation);
+        animation-duration: 200ms;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+     }
+}
+
+@keyframes fade  {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.9;
+    }
+}

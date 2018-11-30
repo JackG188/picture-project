@@ -1,66 +1,52 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '../reducers';
+import { RootState } from '../../reducers';
 import * as ReactModal from 'react-modal';
 import * as ReactMarkdown from 'react-markdown';
 
 import './modal.scss';
-import { viewModal } from '../actions';
+import { viewModal, setMarkdown } from '../../actions';
 
 interface StateProps {
     location?: string;
     show: boolean;
-}
-
-interface ModalState {
-    markdown: any;
-    location: string;
+    markdown: string;
 }
 
 interface DispatchProps {
     toggleModal: () => void;
+    setMarkdown: (md: string) => void;
 }
 
 const mapStateToProps = (state: RootState) => {
     return { 
         location: state.selectedLocation, 
-        show: state.viewModal
+        show: state.viewModal,
+        markdown: state.markdown
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        toggleModal: () => dispatch(viewModal())
+        toggleModal: () => dispatch(viewModal()),
+        setMarkdown: (md: string) => dispatch(setMarkdown(md))
     };
 };
 
-class ConnectedModal extends React.Component<StateProps & DispatchProps, ModalState> {
+class ConnectedModal extends React.Component<StateProps & DispatchProps> {
 
     constructor(props: StateProps & DispatchProps) {
         super(props);
-
-        this.state = {
-            markdown: '',
-            location: ''
-        };
     }
 
     componentDidUpdate() {
-        if (this.props.location !== '' && this.props.location !== undefined && this.state.markdown === '') {
+        if (this.props.location !== '' && this.props.location !== undefined) {
             const formattedLocation = this.props.location.toLowerCase();
-            const readmePath = require(`../data/content/markdown/${formattedLocation}.md.js`);
-            // console.log(readmePath);
-            // if (readmePath !== undefined) {
-            //     fetch(readmePath)
-            //     .then(response => {
-            //         console.log(response);
-            //         return response.body;
-            //     })
-            //     .then(text => {
-            this.setState({
-            markdown: readmePath.default
-            });
-                // });
+            try {
+                this.props.setMarkdown(require(`../../data/content/markdown/${formattedLocation}.md.js`).default);
+            } catch {
+                console.log('error reading markdown file');
+            }
         }
     }
 
@@ -74,7 +60,7 @@ class ConnectedModal extends React.Component<StateProps & DispatchProps, ModalSt
             >
                 <div className="modalBody">
                     {this.state !== undefined && (
-                        <ReactMarkdown className="markdownContainer" source={this.state.markdown}/>
+                        <ReactMarkdown className="markdownContainer" escapeHtml={false} source={this.props.markdown}/>
                     )}
                </div>
             </ReactModal>
@@ -83,7 +69,6 @@ class ConnectedModal extends React.Component<StateProps & DispatchProps, ModalSt
 
     toggleModal = () => {
         this.props.toggleModal();
-        this.setState({markdown: ''});
     }
 } 
 

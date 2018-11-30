@@ -1,10 +1,10 @@
 import * as React from 'react';
 import './map.scss';
 import { connect } from 'react-redux';
-import Pin, { PinProps } from './pin';
+import Pin, { PinProps } from '../pin/pin';
 import GoogleMapReact, { Options } from 'google-map-react';
-import { RootState } from '../reducers';
-import mapStyles from './mapStyles';
+import { RootState } from '../../reducers';
+import mapStyles from '../mapStyles';
 
 export interface MapProps {
   center: LocationObject;

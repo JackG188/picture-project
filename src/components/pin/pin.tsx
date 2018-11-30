@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './pin.scss';
 import { connect } from 'react-redux';
-import { selectLocation, viewModal } from '../actions/index';
+import { selectLocation, viewModal } from '../../actions/index';
 
 export interface PinProps {
   lat: number;
